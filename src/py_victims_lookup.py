@@ -16,8 +16,6 @@ import sources
 import victim_file
 import victim_db_manager
 
-db_conn = None
-
 def find_similar_binary_by_name (package_name):
     """
     Function that gathers the list of sources from the sources
