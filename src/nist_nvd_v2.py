@@ -45,13 +45,10 @@ valid = False
 # The dictionary of valid vulnerable entries currently parsed
 vuln_list = None
 
-# Reference to the VictimDB object in use
-cache_db = None
-
 # Is caching turned on?
 CACHING = True
 
-def _cache_uptodate ():
+def _cache_uptodate (cache_db):
     """
     Check if the cache is up to date.
 
@@ -79,14 +76,13 @@ def get_entries ():
     """
     global vuln_list
 
+    cache_db = None
     vuln_list = {}
 
     if CACHING:
-        global cache_db
-
         cache_db = victim_db_manager.VictimDB (table="cache_nistv2")
 
-        if _cache_uptodate ():
+        if _cache_uptodate (cache_db):
             # If the cache is up to date, return the cache
             return cache_db.get_cache ()
 
